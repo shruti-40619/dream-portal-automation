@@ -1,31 +1,28 @@
 const { test, expect } = require('@playwright/test');
 
+const { HomePage } = require('../Pages/HomePage');
+
 test('Homepage validations', async ({ page, context }) => {
 
-    await page.goto('https://arjitnigam.github.io/myDreams/');
+    const homePage = new HomePage(page);
 
-    // Loader validation
-    const loader = page.locator('.spinner');
+    await homePage.navigate();
 
-    await expect(loader).toBeVisible();
+    await expect(homePage.loader).toBeVisible();
 
-    await expect(loader).toBeHidden();
+    await expect(homePage.loader).toBeHidden();
 
-    // Button visible or not
-    const myDreamsBtn = page.getByText('My Dreams');
-
-    await expect(myDreamsBtn).toBeVisible();
+    await expect(homePage.myDreamsBtn).toBeVisible();
 
     await page.screenshot({
-       path: 'screenshots/homepage.png',
-       fullPage: true
+        path: 'screenshots/homepage.png',
+        fullPage: true
     });
 
-    // Handle two tabs
     const pagePromise1 = context.waitForEvent('page');
     const pagePromise2 = context.waitForEvent('page');
 
-    await myDreamsBtn.click();
+    await homePage.myDreamsBtn.click();
 
     const newPage1 = await pagePromise1;
     const newPage2 = await pagePromise2;
@@ -34,22 +31,16 @@ test('Homepage validations', async ({ page, context }) => {
     await newPage2.waitForLoadState();
 
     const urls = [
-      await newPage1.url(),
-      await newPage2.url()
+        await newPage1.url(),
+        await newPage2.url()
     ];
 
-    console.log(urls);
-
-    // Verify diary page opened
     expect(
-       urls.some(url => url.includes('dreams-diary'))
+        urls.some(url => url.includes('dreams-diary'))
     ).toBeTruthy();
 
-    // Verify summary page opened
     expect(
-       urls.some(url => url.includes('dreams-total'))
+        urls.some(url => url.includes('dreams-total'))
     ).toBeTruthy();
-
-   
 
 });
