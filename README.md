@@ -117,4 +117,5 @@ The automation framework successfully detected this mismatch during multi-tab va
 Due to this issue, the Summary page validations were executed using direct URL navigation instead of homepage navigation.
 
 Author
+
 Shruti 
