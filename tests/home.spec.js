@@ -45,4 +45,9 @@ test('Homepage validations', async ({ page, context }) => {
        urls.some(url => url.includes('dreams-total'))
     ).toBeTruthy();
 
+    await page.screenshot({
+       path: 'screenshots/homepage.png',
+       fullPage: true
+    });
+
 });

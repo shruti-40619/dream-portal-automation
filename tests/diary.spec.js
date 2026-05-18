@@ -40,5 +40,10 @@ test('Dream diary table validations', async ({ page }) => {
             `${dreamName} | ${daysAgo} | ${dreamType}`
         );
     }
+   
+    await page.screenshot({
+       path: 'screenshots/diary-page.png',
+       fullPage: true
+    });
 
 });

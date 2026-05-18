@@ -24,6 +24,11 @@ test('Summary page validations', async ({ page }) => {
         page.locator('tr').filter({ hasText: 'Recurring Dreams' })
     ).toContainText('2');
 
+    await page.screenshot({
+        path: 'screenshots/summary-page.png',
+        fullPage: true
+    });
+
 });
 
 
@@ -63,5 +68,10 @@ test('Recurring dreams validation', async ({ page }) => {
 
     expect(recurringDreams)
         .toContain('Lost in maze');
+
+    await page.screenshot({
+       path: 'screenshots/recurring-dreams.png',
+       fullPage: true
+    });
 
 });
