@@ -16,6 +16,11 @@ test('Homepage validations', async ({ page, context }) => {
 
     await expect(myDreamsBtn).toBeVisible();
 
+    await page.screenshot({
+       path: 'screenshots/homepage.png',
+       fullPage: true
+    });
+
     // Handle two tabs
     const pagePromise1 = context.waitForEvent('page');
     const pagePromise2 = context.waitForEvent('page');
@@ -45,9 +50,6 @@ test('Homepage validations', async ({ page, context }) => {
        urls.some(url => url.includes('dreams-total'))
     ).toBeTruthy();
 
-    await page.screenshot({
-       path: 'screenshots/homepage.png',
-       fullPage: true
-    });
+   
 
 });
